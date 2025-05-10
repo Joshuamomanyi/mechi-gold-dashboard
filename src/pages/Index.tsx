@@ -1,14 +1,61 @@
-// Update this page (the content is just a fallback if you fail to update the page)
 
-const Index = () => {
+import React from "react";
+import DashboardLayout from "@/components/dashboard/DashboardLayout";
+import StatCard from "@/components/dashboard/StatCard";
+import RecentActivity from "@/components/dashboard/RecentActivity";
+import UpcomingMatches from "@/components/dashboard/UpcomingMatches";
+import { 
+  CalendarDays, 
+  Trophy, 
+  Users, 
+  ListVideo 
+} from "lucide-react";
+
+const Dashboard = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <DashboardLayout>
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold mb-1">Welcome to MechiTV Dashboard</h1>
+        <p className="text-muted-foreground">
+          Manage all your sports content in one place
+        </p>
       </div>
-    </div>
+
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+        <StatCard 
+          title="Total Competitions"
+          value={24}
+          icon={<Trophy size={20} className="text-mechitv-accent" />}
+          trend={{ value: 12, isPositive: true }}
+        />
+        <StatCard 
+          title="Active Seasons"
+          value={8}
+          icon={<CalendarDays size={20} className="text-mechitv-accent" />}
+          trend={{ value: 5, isPositive: true }}
+        />
+        <StatCard 
+          title="Registered Teams"
+          value={168}
+          icon={<Users size={20} className="text-mechitv-accent" />}
+          trend={{ value: 24, isPositive: true }}
+        />
+        <StatCard 
+          title="Video Highlights"
+          value={532}
+          icon={<ListVideo size={20} className="text-mechitv-accent" />}
+          trend={{ value: 3, isPositive: false }}
+        />
+      </div>
+
+      {/* Content Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <UpcomingMatches />
+        <RecentActivity />
+      </div>
+    </DashboardLayout>
   );
 };
 
-export default Index;
+export default Dashboard;
