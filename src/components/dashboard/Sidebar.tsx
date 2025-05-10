@@ -12,7 +12,8 @@ import {
   ListVideo,
   LayoutGrid,
   Settings,
-  LogOut
+  LogOut,
+  List
 } from "lucide-react";
 
 interface SidebarProps {
@@ -77,6 +78,10 @@ const Sidebar = ({ isMobileOpen, toggleSidebar }: SidebarProps) => {
               <a href="#" className="sidebar-link">
                 <User size={18} />
                 <span>Players</span>
+              </a>
+              <a href="#" className="sidebar-link">
+                <List size={18} />
+                <span>Lineups</span>
               </a>
               <a href="#" className="sidebar-link">
                 <Radio size={18} />
