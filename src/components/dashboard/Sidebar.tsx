@@ -1,5 +1,6 @@
 
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { 
   Menu,
@@ -9,11 +10,11 @@ import {
   Users,
   User,
   Radio,
+  List,
   ListVideo,
   LayoutGrid,
   Settings,
-  LogOut,
-  List
+  LogOut
 } from "lucide-react";
 
 interface SidebarProps {
@@ -22,6 +23,9 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ isMobileOpen, toggleSidebar }: SidebarProps) => {
+  const location = useLocation();
+  const path = location.pathname;
+
   return (
     <>
       {/* Mobile overlay */}
@@ -51,10 +55,10 @@ const Sidebar = ({ isMobileOpen, toggleSidebar }: SidebarProps) => {
               Dashboard
             </div>
             <nav className="space-y-1">
-              <a href="#" className="sidebar-link active">
+              <Link to="/" className={`sidebar-link ${path === '/' ? 'active' : ''}`}>
                 <LayoutGrid size={18} />
                 <span>Overview</span>
-              </a>
+              </Link>
             </nav>
           </div>
 
@@ -63,34 +67,34 @@ const Sidebar = ({ isMobileOpen, toggleSidebar }: SidebarProps) => {
               Management
             </div>
             <nav className="space-y-1">
-              <a href="#" className="sidebar-link">
+              <Link to="/competitions" className={`sidebar-link ${path === '/competitions' ? 'active' : ''}`}>
                 <Trophy size={18} />
                 <span>Competitions</span>
-              </a>
-              <a href="#" className="sidebar-link">
+              </Link>
+              <Link to="/seasons" className={`sidebar-link ${path === '/seasons' ? 'active' : ''}`}>
                 <CalendarDays size={18} />
                 <span>Seasons</span>
-              </a>
-              <a href="#" className="sidebar-link">
+              </Link>
+              <Link to="/teams" className={`sidebar-link ${path === '/teams' ? 'active' : ''}`}>
                 <Users size={18} />
                 <span>Teams</span>
-              </a>
-              <a href="#" className="sidebar-link">
+              </Link>
+              <Link to="/players" className={`sidebar-link ${path === '/players' ? 'active' : ''}`}>
                 <User size={18} />
                 <span>Players</span>
-              </a>
-              <a href="#" className="sidebar-link">
+              </Link>
+              <Link to="/lineups" className={`sidebar-link ${path === '/lineups' ? 'active' : ''}`}>
                 <List size={18} />
                 <span>Lineups</span>
-              </a>
-              <a href="#" className="sidebar-link">
+              </Link>
+              <Link to="/matches" className={`sidebar-link ${path === '/matches' ? 'active' : ''}`}>
                 <Radio size={18} />
                 <span>Matches</span>
-              </a>
-              <a href="#" className="sidebar-link">
+              </Link>
+              <Link to="/highlights" className={`sidebar-link ${path === '/highlights' ? 'active' : ''}`}>
                 <ListVideo size={18} />
                 <span>Highlights</span>
-              </a>
+              </Link>
             </nav>
           </div>
 
@@ -99,14 +103,14 @@ const Sidebar = ({ isMobileOpen, toggleSidebar }: SidebarProps) => {
               Settings
             </div>
             <nav className="space-y-1">
-              <a href="#" className="sidebar-link">
+              <Link to="/settings" className={`sidebar-link ${path === '/settings' ? 'active' : ''}`}>
                 <Settings size={18} />
                 <span>Preferences</span>
-              </a>
-              <a href="#" className="sidebar-link text-red-400 hover:text-red-500 hover:bg-red-950/20">
+              </Link>
+              <Link to="/logout" className="sidebar-link text-red-400 hover:text-red-500 hover:bg-red-950/20">
                 <LogOut size={18} />
                 <span>Logout</span>
-              </a>
+              </Link>
             </nav>
           </div>
         </div>
