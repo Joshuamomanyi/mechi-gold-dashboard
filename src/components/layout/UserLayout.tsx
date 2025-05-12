@@ -6,7 +6,10 @@ import {
   Search, 
   User, 
   Menu, 
-  Bell 
+  Bell,
+  Flag,
+  Play,
+  MessageSquare
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
@@ -46,10 +49,20 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                 <span className="text-xl font-bold text-gradient">MechiTV</span>
               </Link>
               <nav className="hidden md:flex space-x-6">
-                <Link to="/matches" className="text-sm hover:text-mechitv-accent">Live Matches</Link>
-                <Link to="/leagues" className="text-sm hover:text-mechitv-accent">Leagues</Link>
-                <Link to="/tournaments" className="text-sm hover:text-mechitv-accent">Tournaments</Link>
-                <Link to="/teams" className="text-sm hover:text-mechitv-accent">Teams</Link>
+                <Link to="/" className="text-sm hover:text-mechitv-accent">Home</Link>
+                <Link to="/highlights" className="text-sm hover:text-mechitv-accent">
+                  <span className="flex items-center">
+                    <Play className="h-4 w-4 mr-1" />
+                    Highlights
+                  </span>
+                </Link>
+                <Link to="/news" className="text-sm hover:text-mechitv-accent">News</Link>
+                <Link to="/community" className="text-sm hover:text-mechitv-accent">
+                  <span className="flex items-center">
+                    <MessageSquare className="h-4 w-4 mr-1" />
+                    Community
+                  </span>
+                </Link>
               </nav>
             </div>
             
@@ -65,14 +78,11 @@ const UserLayout = ({ children }: UserLayoutProps) => {
               <Button variant="ghost" size="icon" className="lg:hidden">
                 <Search className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="icon">
-                <Bell className="h-5 w-5" />
-              </Button>
               <Button variant="outline" size="sm" className="hidden md:flex">
-                <User className="mr-2 h-4 w-4" /> Sign In
+                <User className="mr-2 h-4 w-4" /> Login
               </Button>
               <Button size="sm" className="bg-mechitv-accent text-mechitv-bg hover:bg-mechitv-accent/90 hidden md:flex">
-                Subscribe
+                Sign Up
               </Button>
               <Button variant="ghost" size="icon" className="md:hidden">
                 <Menu className="h-5 w-5" />

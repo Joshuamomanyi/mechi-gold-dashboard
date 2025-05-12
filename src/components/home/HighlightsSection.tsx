@@ -58,12 +58,13 @@ const HighlightsSection = ({ highlights }: HighlightsSectionProps) => {
                       className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-mechitv-accent text-mechitv-bg rounded-full opacity-90 group-hover:opacity-100 transition-opacity"
                     >
                       <Play className="h-6 w-6" />
+                      <span className="sr-only">Watch Now</span>
                     </Button>
-                    <span className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">
+                    <div className="absolute top-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded">
                       {highlight.duration}
-                    </span>
+                    </div>
                   </div>
-                  <CardContent className="p-3">
+                  <CardContent className="p-4">
                     <h3 className="font-semibold text-white line-clamp-1">{highlight.title}</h3>
                     <p className="text-muted-foreground text-sm mt-1 line-clamp-2">
                       {highlight.description}

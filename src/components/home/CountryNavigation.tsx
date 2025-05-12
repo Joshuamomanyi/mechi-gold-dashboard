@@ -23,21 +23,25 @@ const CountryNavigation = ({ countries, onCountryChange, activeCountry }: Countr
           onValueChange={(value) => onCountryChange(value)}
           className="w-full"
         >
-          <TabsList className="flex items-center justify-center space-x-4 md:space-x-8 overflow-x-auto pb-2 bg-transparent">
+          <TabsList className="flex items-center justify-center space-x-6 md:space-x-8 bg-transparent">
             {countries.map((country) => (
               <TabsTrigger 
                 key={country.id} 
                 value={country.name}
-                className="flex flex-col items-center px-3 py-2 data-[state=active]:bg-mechitv-bg-light/40 data-[state=active]:border-b-2 data-[state=active]:border-mechitv-accent"
+                className="flex flex-col items-center px-3 py-2 data-[state=active]:bg-transparent"
               >
-                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-transparent group-hover:border-mechitv-accent transition-all">
+                <div className={`w-12 h-12 rounded-full overflow-hidden border-2 transition-all ${
+                  activeCountry === country.name ? 'border-mechitv-accent' : 'border-transparent'
+                }`}>
                   <img 
                     src={country.flag} 
                     alt={`${country.name} flag`} 
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <span className="text-xs mt-1 text-white/80 group-hover:text-mechitv-accent">
+                <span className={`text-xs mt-1 transition-colors ${
+                  activeCountry === country.name ? 'text-mechitv-accent' : 'text-white/80'
+                }`}>
                   {country.name}
                 </span>
               </TabsTrigger>

@@ -30,6 +30,11 @@ const HomePage = () => {
     setActiveCountry(country);
   };
 
+  // Filter featured matches based on active country
+  const filteredMatches = featuredMatches.filter(match => 
+    match.country === activeCountry || activeCountry === "All"
+  );
+
   return (
     <div className="min-h-screen bg-mechitv-bg">
       {/* Hero Section */}
@@ -44,7 +49,7 @@ const HomePage = () => {
 
       {/* Featured Live Matches */}
       <FeaturedMatches 
-        matches={featuredMatches} 
+        matches={filteredMatches} 
         activeCountry={activeCountry}
       />
 

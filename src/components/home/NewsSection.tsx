@@ -53,16 +53,20 @@ const NewsSection = ({ news }: NewsSectionProps) => {
                     .map((item) => (
                       <CarouselItem key={item.id} className="md:basis-1/2 lg:basis-1/3 p-1">
                         <Card className="bg-mechitv-bg border-border hover:border-mechitv-accent/50 transition-all">
-                          <div className="aspect-video overflow-hidden">
+                          <div className="aspect-video overflow-hidden relative">
                             <img 
                               src={item.image} 
                               alt={item.title} 
                               className="w-full h-full object-cover hover:scale-105 transition-transform" 
                             />
+                            <div className="absolute top-3 left-3">
+                              <span className="bg-mechitv-accent text-black text-xs font-medium px-2 py-1 rounded">
+                                {item.category}
+                              </span>
+                            </div>
                           </div>
                           <CardContent className="p-4">
-                            <div className="flex justify-between items-center mb-2">
-                              <span className="text-mechitv-accent text-xs">{item.category}</span>
+                            <div className="flex justify-end items-center mb-2">
                               <span className="text-muted-foreground text-xs">{item.date}</span>
                             </div>
                             <h3 className="font-semibold text-white mb-2 line-clamp-2">{item.title}</h3>
