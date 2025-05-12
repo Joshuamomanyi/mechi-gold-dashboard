@@ -6,10 +6,28 @@ import {
   Search, 
   User, 
   Menu, 
-  Bell, 
-  Football 
+  Bell 
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
+
+// Create a custom SoccerIcon component as replacement for Football
+const SoccerIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <circle cx="12" cy="12" r="10"></circle>
+    <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm6 5.8-2.8 4.8-1.4-1.4-4.8 2.8-1 4-4-1 2.8-4.8-1.4-1.4 4.8-2.8 1-4 4 1z"></path>
+  </svg>
+);
 
 interface UserLayoutProps {
   children: React.ReactNode;
@@ -24,7 +42,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
               <Link to="/" className="flex items-center">
-                <Football className="h-6 w-6 text-mechitv-accent mr-2" />
+                <SoccerIcon className="h-6 w-6 text-mechitv-accent mr-2" />
                 <span className="text-xl font-bold text-gradient">MechiTV</span>
               </Link>
               <nav className="hidden md:flex space-x-6">
