@@ -45,7 +45,9 @@ const Sidebar = ({ isMobileOpen, toggleSidebar }: SidebarProps) => {
       >
         {/* Logo */}
         <div className="flex items-center justify-center h-16 border-b border-border">
-          <h1 className="text-xl font-bold text-gradient">MechiTV Admin</h1>
+          <Link to="/admin">
+            <h1 className="text-xl font-bold text-gradient">MechiTV Admin</h1>
+          </Link>
         </div>
 
         {/* Navigation */}
@@ -55,7 +57,7 @@ const Sidebar = ({ isMobileOpen, toggleSidebar }: SidebarProps) => {
               Dashboard
             </div>
             <nav className="space-y-1">
-              <Link to="/" className={`sidebar-link ${path === '/' ? 'active' : ''}`}>
+              <Link to="/admin" className={`sidebar-link ${path === '/admin' ? 'active' : ''}`}>
                 <LayoutGrid size={18} />
                 <span>Overview</span>
               </Link>
@@ -67,31 +69,31 @@ const Sidebar = ({ isMobileOpen, toggleSidebar }: SidebarProps) => {
               Management
             </div>
             <nav className="space-y-1">
-              <Link to="/competitions" className={`sidebar-link ${path === '/competitions' ? 'active' : ''}`}>
+              <Link to="/admin/competitions" className={`sidebar-link ${path === '/admin/competitions' ? 'active' : ''}`}>
                 <Trophy size={18} />
                 <span>Competitions</span>
               </Link>
-              <Link to="/seasons" className={`sidebar-link ${path === '/seasons' ? 'active' : ''}`}>
+              <Link to="/admin/seasons" className={`sidebar-link ${path === '/admin/seasons' ? 'active' : ''}`}>
                 <CalendarDays size={18} />
                 <span>Seasons</span>
               </Link>
-              <Link to="/teams" className={`sidebar-link ${path === '/teams' ? 'active' : ''}`}>
+              <Link to="/admin/teams" className={`sidebar-link ${path === '/admin/teams' ? 'active' : ''}`}>
                 <Users size={18} />
                 <span>Teams</span>
               </Link>
-              <Link to="/players" className={`sidebar-link ${path === '/players' ? 'active' : ''}`}>
+              <Link to="/admin/players" className={`sidebar-link ${path === '/admin/players' ? 'active' : ''}`}>
                 <User size={18} />
                 <span>Players</span>
               </Link>
-              <Link to="/lineups" className={`sidebar-link ${path === '/lineups' ? 'active' : ''}`}>
+              <Link to="/admin/lineups" className={`sidebar-link ${path === '/admin/lineups' ? 'active' : ''}`}>
                 <List size={18} />
                 <span>Lineups</span>
               </Link>
-              <Link to="/matches" className={`sidebar-link ${path === '/matches' ? 'active' : ''}`}>
+              <Link to="/admin/matches" className={`sidebar-link ${path === '/admin/matches' ? 'active' : ''}`}>
                 <Radio size={18} />
                 <span>Matches</span>
               </Link>
-              <Link to="/highlights" className={`sidebar-link ${path === '/highlights' ? 'active' : ''}`}>
+              <Link to="/admin/highlights" className={`sidebar-link ${path === '/admin/highlights' ? 'active' : ''}`}>
                 <ListVideo size={18} />
                 <span>Highlights</span>
               </Link>
@@ -103,13 +105,13 @@ const Sidebar = ({ isMobileOpen, toggleSidebar }: SidebarProps) => {
               Settings
             </div>
             <nav className="space-y-1">
-              <Link to="/settings" className={`sidebar-link ${path === '/settings' ? 'active' : ''}`}>
+              <Link to="/admin/settings" className={`sidebar-link ${path === '/admin/settings' ? 'active' : ''}`}>
                 <Settings size={18} />
                 <span>Preferences</span>
               </Link>
-              <Link to="/logout" className="sidebar-link text-red-400 hover:text-red-500 hover:bg-red-950/20">
+              <Link to="/" className="sidebar-link text-red-400 hover:text-red-500 hover:bg-red-950/20">
                 <LogOut size={18} />
-                <span>Logout</span>
+                <span>Back to Main Site</span>
               </Link>
             </nav>
           </div>

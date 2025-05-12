@@ -4,10 +4,12 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import HomePage from "./pages/HomePage";
+import UserLayout from "./components/layout/UserLayout";
 import NotFound from "./pages/NotFound";
 
-// Import our new pages
+// Admin pages
+import AdminIndex from "./pages/Index"; // Renamed to distinguish from the main HomePage
 import CompetitionsPage from "./pages/CompetitionsPage";
 import SeasonsPage from "./pages/SeasonsPage";
 import TeamsPage from "./pages/TeamsPage";
@@ -26,16 +28,21 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/competitions" element={<CompetitionsPage />} />
-          <Route path="/seasons" element={<SeasonsPage />} />
-          <Route path="/teams" element={<TeamsPage />} />
-          <Route path="/players" element={<PlayersPage />} />
-          <Route path="/lineups" element={<LineupsPage />} />
-          <Route path="/matches" element={<MatchesPage />} />
-          <Route path="/highlights" element={<HighlightsPage />} />
-          <Route path="/settings" element={<SettingsPage />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          {/* User-facing routes */}
+          <Route path="/" element={<UserLayout><HomePage /></UserLayout>} />
+          
+          {/* Admin routes */}
+          <Route path="/admin" element={<AdminIndex />} />
+          <Route path="/admin/competitions" element={<CompetitionsPage />} />
+          <Route path="/admin/seasons" element={<SeasonsPage />} />
+          <Route path="/admin/teams" element={<TeamsPage />} />
+          <Route path="/admin/players" element={<PlayersPage />} />
+          <Route path="/admin/lineups" element={<LineupsPage />} />
+          <Route path="/admin/matches" element={<MatchesPage />} />
+          <Route path="/admin/highlights" element={<HighlightsPage />} />
+          <Route path="/admin/settings" element={<SettingsPage />} />
+          
+          {/* Catch-all route */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
