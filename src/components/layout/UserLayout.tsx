@@ -7,7 +7,7 @@ import {
   User, 
   Menu, 
   Bell, 
-  GamepadIcon 
+  Football 
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
@@ -24,21 +24,21 @@ const UserLayout = ({ children }: UserLayoutProps) => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
               <Link to="/" className="flex items-center">
-                <GamepadIcon className="h-6 w-6 text-mechitv-accent mr-2" />
+                <Football className="h-6 w-6 text-mechitv-accent mr-2" />
                 <span className="text-xl font-bold text-gradient">MechiTV</span>
               </Link>
               <nav className="hidden md:flex space-x-6">
-                <Link to="/browse" className="text-sm hover:text-mechitv-accent">Browse</Link>
-                <Link to="/esports" className="text-sm hover:text-mechitv-accent">Esports</Link>
+                <Link to="/matches" className="text-sm hover:text-mechitv-accent">Live Matches</Link>
+                <Link to="/leagues" className="text-sm hover:text-mechitv-accent">Leagues</Link>
                 <Link to="/tournaments" className="text-sm hover:text-mechitv-accent">Tournaments</Link>
-                <Link to="/clips" className="text-sm hover:text-mechitv-accent">Clips</Link>
+                <Link to="/teams" className="text-sm hover:text-mechitv-accent">Teams</Link>
               </nav>
             </div>
             
             <div className="hidden lg:flex items-center relative max-w-md w-full mx-4">
               <Search className="absolute left-3 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search streams, games, or channels..."
+                placeholder="Search teams, leagues or matches..."
                 className="pl-9 bg-mechitv-bg border-mechitv-bg-light focus-visible:ring-mechitv-accent/30 focus-visible:ring-offset-0"
               />
             </div>
@@ -54,7 +54,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                 <User className="mr-2 h-4 w-4" /> Sign In
               </Button>
               <Button size="sm" className="bg-mechitv-accent text-mechitv-bg hover:bg-mechitv-accent/90 hidden md:flex">
-                Sign Up
+                Subscribe
               </Button>
               <Button variant="ghost" size="icon" className="md:hidden">
                 <Menu className="h-5 w-5" />
