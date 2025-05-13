@@ -27,17 +27,37 @@ const PopularLeagues = ({ leagues }: PopularLeaguesProps) => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {leagues.map(league => (
-          <div key={league.id} className="bg-mechitv-bg-light rounded-lg overflow-hidden border border-border hover:border-mechitv-accent/50 transition-all group">
+        {leagues.map((league, index) => (
+          <div 
+            key={league.id} 
+            className="bg-mechitv-bg-light rounded-lg overflow-hidden border border-border hover:border-mechitv-accent/50 transition-all group"
+            style={{
+              animation: 'fadeIn 2s ease normal',
+              animationDelay: `${index * 0.2}s`,
+              animationFillMode: 'none',
+              animationIterationCount: '1',
+              animationPlayState: 'running',
+              boxSizing: 'border-box',
+              cursor: 'pointer'
+            }}
+          >
             <div className="relative">
               <img 
                 src={league.image} 
                 alt={league.name} 
                 className="w-full h-40 object-cover group-hover:scale-105 transition-transform"
+                style={{
+                  height: '200px',
+                  width: '100%',
+                  overflow: 'clip',
+                  verticalAlign: 'middle',
+                  WebkitFontSmoothing: 'subpixel-antialiased',
+                  WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)'
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-4">
-                <h3 className="font-medium text-lg text-white">{league.name}</h3>
+                <h3 className="font-medium text-lg text-mechitv-accent">{league.name}</h3>
               </div>
             </div>
             <div className="p-4 flex justify-between items-center">

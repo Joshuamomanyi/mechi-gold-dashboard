@@ -25,6 +25,9 @@ interface TeamsAndMatchesProps {
 }
 
 const TeamsAndMatches = ({ teams, upcomingMatches }: TeamsAndMatchesProps) => {
+  // Limit the displayed teams to only 4
+  const displayedTeams = teams.slice(0, 4);
+  
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -39,11 +42,11 @@ const TeamsAndMatches = ({ teams, upcomingMatches }: TeamsAndMatchesProps) => {
             </Button>
           </div>
           <div className="bg-mechitv-bg-light rounded-lg border border-border p-4">
-            {teams.map((team, index) => (
+            {displayedTeams.map((team, index) => (
               <div 
                 key={team.id} 
                 className={`flex items-center justify-between py-3 ${
-                  index !== teams.length - 1 ? "border-b border-border" : ""
+                  index !== displayedTeams.length - 1 ? "border-b border-border" : ""
                 }`}
               >
                 <div className="flex items-center">

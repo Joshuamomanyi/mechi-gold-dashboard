@@ -12,7 +12,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
-import { Chart, ChartLine, ChartBar, CircleDot } from "lucide-react";
+import { BarChart, ChartLine, CircleDot } from "lucide-react";
 
 // Sample player performance data
 const topPlayers = [
