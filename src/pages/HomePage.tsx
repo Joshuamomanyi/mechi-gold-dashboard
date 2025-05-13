@@ -53,9 +53,6 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-mechitv-bg">
-      {/* Hero Section */}
-      <HeroSection />
-
       {/* Country Navigation */}
       <CountryNavigation 
         countries={countries} 
@@ -68,6 +65,9 @@ const HomePage = () => {
         matches={filteredMatches} 
         activeCountry={activeCountry}
       />
+
+      {/* Hero Section - moved down after country nav and featured matches */}
+      <HeroSection />
 
       {/* Player Performance Section */}
       <PlayerPerformance />
