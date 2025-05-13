@@ -14,7 +14,7 @@ import NewsSection from "@/components/home/NewsSection";
 
 // Import data
 import { 
-  featuredMatches, 
+  featuredMatches as rawFeaturedMatches, 
   popularLeagues, 
   popularTeams, 
   upcomingMatches, 
@@ -22,6 +22,21 @@ import {
   highlights,
   sportsNews
 } from "@/components/home/data";
+
+// Type-safe mapping of match status
+const mapStatusToAllowedType = (status: string): "LIVE" | "COUNTDOWN" | "FINISHED" => {
+  if (status === "LIVE" || status === "COUNTDOWN" || status === "FINISHED") {
+    return status as "LIVE" | "COUNTDOWN" | "FINISHED";
+  }
+  // Default fallback
+  return "FINISHED";
+};
+
+// Map the matches to ensure status conforms to the expected type
+const featuredMatches = rawFeaturedMatches.map(match => ({
+  ...match,
+  status: mapStatusToAllowedType(match.status)
+}));
 
 const HomePage = () => {
   const [activeCountry, setActiveCountry] = useState("Kenya");
