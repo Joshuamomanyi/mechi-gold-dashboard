@@ -5,7 +5,7 @@ import { Play } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <div className="relative bg-gradient-to-r from-mechitv-accent/70 to-mechitv-bg min-h-[50vh] flex items-center py-16 md:py-20">
+    <div className="relative bg-gradient-to-r from-mechitv-accent/70 to-mechitv-bg min-h-[50vh] flex items-center py-8 md:py-10">
       <div className="absolute inset-0 bg-mechitv-bg-light/20 backdrop-blur-sm"></div>
       <div className="container mx-auto px-4 z-10">
         <div className="max-w-2xl">

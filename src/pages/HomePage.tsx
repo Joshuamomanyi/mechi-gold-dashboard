@@ -11,6 +11,7 @@ import CTASection from "@/components/home/CTASection";
 import Footer from "@/components/home/Footer";
 import HighlightsSection from "@/components/home/HighlightsSection";
 import NewsSection from "@/components/home/NewsSection";
+import PlayerPerformance from "@/components/home/PlayerPerformance";
 
 // Import data
 import { 
@@ -67,6 +68,9 @@ const HomePage = () => {
         matches={filteredMatches} 
         activeCountry={activeCountry}
       />
+
+      {/* Player Performance Section */}
+      <PlayerPerformance />
 
       {/* Highlights Section */}
       <HighlightsSection highlights={highlights} />

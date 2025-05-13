@@ -35,7 +35,7 @@ const FeaturedMatches = ({ matches, activeCountry }: FeaturedMatchesProps) => {
     <div className="bg-mechitv-bg border-b border-border py-6">
       <div className="container mx-auto px-4">
         <div className="mb-4">
-          <h2 className="text-xl font-bold text-white">
+          <h2 className="text-xl font-bold text-mechitv-accent">
             {activeCountry === "All" ? "All Leagues" : `${activeCountry} Leagues`}
           </h2>
         </div>
