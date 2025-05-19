@@ -15,6 +15,9 @@ interface PopularLeaguesProps {
 }
 
 const PopularLeagues = ({ leagues }: PopularLeaguesProps) => {
+  // Limit to first 4 leagues
+  const limitedLeagues = leagues.slice(0, 4);
+  
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="flex justify-between items-center mb-8">
@@ -27,19 +30,10 @@ const PopularLeagues = ({ leagues }: PopularLeaguesProps) => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {leagues.map((league, index) => (
+        {limitedLeagues.map((league) => (
           <div 
             key={league.id} 
-            className="bg-mechitv-bg-light rounded-lg overflow-hidden border border-border hover:border-mechitv-accent/50 transition-all group"
-            style={{
-              animation: 'fadeIn 2s ease normal',
-              animationDelay: `${index * 0.2}s`,
-              animationFillMode: 'none',
-              animationIterationCount: '1',
-              animationPlayState: 'running',
-              boxSizing: 'border-box',
-              cursor: 'pointer'
-            }}
+            className="bg-mechitv-bg-light rounded-lg overflow-hidden border border-border hover:border-mechitv-accent/50 transition-all group animate-fadeIn"
           >
             <div className="relative">
               <img 
