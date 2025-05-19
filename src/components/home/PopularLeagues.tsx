@@ -2,6 +2,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Trophy, ArrowRight } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface League {
   id: number;
@@ -15,8 +16,7 @@ interface PopularLeaguesProps {
 }
 
 const PopularLeagues = ({ leagues }: PopularLeaguesProps) => {
-  // Limit to first 4 leagues
-  const limitedLeagues = leagues.slice(0, 4);
+  // No longer limiting to just 4 leagues, showing all leagues
   
   return (
     <div className="container mx-auto px-4 py-12">
@@ -29,9 +29,9 @@ const PopularLeagues = ({ leagues }: PopularLeaguesProps) => {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {limitedLeagues.map((league) => (
-          <div 
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        {leagues.map((league) => (
+          <Card 
             key={league.id} 
             className="bg-mechitv-bg-light rounded-lg overflow-hidden border border-border hover:border-mechitv-accent/50 transition-all group animate-fadeIn"
           >
@@ -54,15 +54,15 @@ const PopularLeagues = ({ leagues }: PopularLeaguesProps) => {
                 <h3 className="font-medium text-lg text-mechitv-accent">{league.name}</h3>
               </div>
             </div>
-            <div className="p-4 flex justify-between items-center">
+            <CardContent className="p-4 flex justify-between items-center">
               <p className="text-sm text-muted-foreground">
                 <SoccerIcon className="inline-block mr-1 h-4 w-4 text-mechitv-accent" /> {league.viewers} viewers
               </p>
               <Button variant="ghost" size="sm" className="text-mechitv-accent hover:text-mechitv-accent/90">
                 Follow
               </Button>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>
