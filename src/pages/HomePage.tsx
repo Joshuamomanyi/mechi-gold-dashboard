@@ -53,6 +53,9 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-mechitv-bg">
+      {/* Hero Section */}
+      <HeroSection />
+
       {/* Country Navigation */}
       <CountryNavigation 
         countries={countries} 
@@ -60,32 +63,29 @@ const HomePage = () => {
         onCountryChange={handleCountryChange}
       />
 
-      {/* Featured Live Matches */}
+      {/* Featured Live Matches - FIRST as requested */}
       <FeaturedMatches 
         matches={filteredMatches} 
         activeCountry={activeCountry}
       />
 
-      {/* Hero Section - moved down after country nav and featured matches */}
-      <HeroSection />
-
-      {/* Player Performance Section */}
-      <PlayerPerformance />
-
-      {/* Highlights Section */}
+      {/* Highlights Section - SECOND as requested */}
       <HighlightsSection highlights={highlights} />
 
-      {/* Featured Content Banner */}
+      {/* News Section - THIRD as requested */}
+      <NewsSection news={sportsNews} />
+
+      {/* Featured Content Banner - FOURTH as requested */}
       <FeatureBanner />
 
-      {/* News Section */}
-      <NewsSection news={sportsNews} />
+      {/* Player Performance Section - FIFTH as requested */}
+      <PlayerPerformance />
+
+      {/* Popular Teams (inside TeamsAndMatches) - SIXTH as requested */}
+      <TeamsAndMatches teams={popularTeams} upcomingMatches={upcomingMatches} />
 
       {/* Leagues Section */}
       <PopularLeagues leagues={popularLeagues} />
-
-      {/* Two Column Layout: Top Teams and Upcoming Matches */}
-      <TeamsAndMatches teams={popularTeams} upcomingMatches={upcomingMatches} />
 
       {/* Pricing Section */}
       <PricingSection />

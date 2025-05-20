@@ -8,6 +8,9 @@ import HomePage from "./pages/HomePage";
 import UserLayout from "./components/layout/UserLayout";
 import NotFound from "./pages/NotFound";
 import NewsPage from "./pages/NewsPage";
+import BlogPostPage from "./pages/BlogPostPage";
+import HighlightsPage from "./pages/HighlightsPage";
+import CommunityPage from "./pages/CommunityPage";
 
 // Admin pages
 import AdminIndex from "./pages/Index"; // Renamed to distinguish from the main HomePage
@@ -17,7 +20,7 @@ import TeamsPage from "./pages/TeamsPage";
 import PlayersPage from "./pages/PlayersPage";
 import LineupsPage from "./pages/LineupsPage";
 import MatchesPage from "./pages/MatchesPage";
-import HighlightsPage from "./pages/HighlightsPage";
+import HighlightsAdminPage from "./pages/HighlightsPage";
 import SettingsPage from "./pages/SettingsPage";
 
 const queryClient = new QueryClient();
@@ -31,7 +34,10 @@ const App = () => (
         <Routes>
           {/* User-facing routes */}
           <Route path="/" element={<UserLayout><HomePage /></UserLayout>} />
-          <Route path="/news" element={<UserLayout><NewsPage /></UserLayout>} />
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/news/:id" element={<BlogPostPage />} />
+          <Route path="/highlights" element={<HighlightsPage />} />
+          <Route path="/community" element={<CommunityPage />} />
           
           {/* Admin routes */}
           <Route path="/admin" element={<AdminIndex />} />
@@ -41,7 +47,7 @@ const App = () => (
           <Route path="/admin/players" element={<PlayersPage />} />
           <Route path="/admin/lineups" element={<LineupsPage />} />
           <Route path="/admin/matches" element={<MatchesPage />} />
-          <Route path="/admin/highlights" element={<HighlightsPage />} />
+          <Route path="/admin/highlights" element={<HighlightsAdminPage />} />
           <Route path="/admin/settings" element={<SettingsPage />} />
           
           {/* Catch-all route */}
