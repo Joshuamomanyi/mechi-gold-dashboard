@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import UserLayout from "./components/layout/UserLayout";
 import NotFound from "./pages/NotFound";
+import NewsPage from "./pages/NewsPage";
 
 // Admin pages
 import AdminIndex from "./pages/Index"; // Renamed to distinguish from the main HomePage
@@ -30,6 +31,7 @@ const App = () => (
         <Routes>
           {/* User-facing routes */}
           <Route path="/" element={<UserLayout><HomePage /></UserLayout>} />
+          <Route path="/news" element={<UserLayout><NewsPage /></UserLayout>} />
           
           {/* Admin routes */}
           <Route path="/admin" element={<AdminIndex />} />
