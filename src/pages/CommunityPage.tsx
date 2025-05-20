@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,6 +23,7 @@ import {
   Pencil,
   Menu as MenuIcon
 } from "lucide-react";
+
 import {
   SidebarProvider,
   Sidebar,
@@ -228,9 +228,38 @@ const sportsCategories = [
   { id: 10, name: "Profile", icon: User },
 ];
 
+// Popular leagues data
+const popularLeagues = [
+  { id: 1, name: "Premier League", logo: "https://i.pravatar.cc/150?img=21", followers: 2450000 },
+  { id: 2, name: "La Liga", logo: "https://i.pravatar.cc/150?img=22", followers: 1890000 },
+  { id: 3, name: "Serie A", logo: "https://i.pravatar.cc/150?img=23", followers: 1320000 },
+  { id: 4, name: "Bundesliga", logo: "https://i.pravatar.cc/150?img=24", followers: 1150000 },
+  { id: 5, name: "Ligue 1", logo: "https://i.pravatar.cc/150?img=25", followers: 980000 }
+];
+
+// Popular teams data
+const popularTeams = [
+  { id: 1, name: "Manchester United", logo: "https://i.pravatar.cc/150?img=31", followers: 1856000 },
+  { id: 2, name: "Barcelona", logo: "https://i.pravatar.cc/150?img=32", followers: 1742000 },
+  { id: 3, name: "Real Madrid", logo: "https://i.pravatar.cc/150?img=33", followers: 1735000 },
+  { id: 4, name: "Liverpool", logo: "https://i.pravatar.cc/150?img=34", followers: 1450000 },
+  { id: 5, name: "Bayern Munich", logo: "https://i.pravatar.cc/150?img=35", followers: 1320000 }
+];
+
+const formatFollowerCount = (count: number): string => {
+  if (count >= 1000000) {
+    return `${(count / 1000000).toFixed(1)}M followers`;
+  } else if (count >= 1000) {
+    return `${(count / 1000).toFixed(1)}K followers`;
+  }
+  return `${count} followers`;
+};
+
 const CommunityPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [followedLeagues, setFollowedLeagues] = useState<number[]>([]);
+  const [followedTeams, setFollowedTeams] = useState<number[]>([]);
   
   // Filter discussions based on search query
   const filteredDiscussions = discussions.filter(item => 
@@ -241,6 +270,22 @@ const CommunityPage = () => {
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+  };
+
+  const toggleFollowLeague = (leagueId: number) => {
+    setFollowedLeagues(prev => 
+      prev.includes(leagueId) 
+        ? prev.filter(id => id !== leagueId) 
+        : [...prev, leagueId]
+    );
+  };
+
+  const toggleFollowTeam = (teamId: number) => {
+    setFollowedTeams(prev => 
+      prev.includes(teamId) 
+        ? prev.filter(id => id !== teamId) 
+        : [...prev, teamId]
+    );
   };
 
   return (
@@ -446,8 +491,8 @@ const CommunityPage = () => {
                 </CardContent>
               </Card>
               
-              {/* Who to follow */}
-              <Card className="bg-mechitv-bg-light border-border">
+              {/* Who to follow - Users */}
+              <Card className="bg-mechitv-bg-light border-border mb-6">
                 <CardContent className="p-4">
                   <h3 className="font-bold text-lg mb-4">Who to follow</h3>
                   <div className="space-y-4">
@@ -471,6 +516,78 @@ const CommunityPage = () => {
                   </div>
                   <Button variant="ghost" className="text-mechitv-accent w-full mt-2">
                     Show more
+                  </Button>
+                </CardContent>
+              </Card>
+              
+              {/* Popular Leagues to Follow */}
+              <Card className="bg-mechitv-bg-light border-border mb-6">
+                <CardContent className="p-4">
+                  <h3 className="font-bold text-lg mb-4">Popular Leagues</h3>
+                  <div className="space-y-4">
+                    {popularLeagues.map((league) => (
+                      <div key={league.id} className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <Avatar className="h-10 w-10 mr-3">
+                            <AvatarImage src={league.logo} alt={league.name} />
+                            <AvatarFallback>{league.name.charAt(0)}</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <p className="font-semibold">{league.name}</p>
+                            <p className="text-xs text-muted-foreground">{formatFollowerCount(league.followers)}</p>
+                          </div>
+                        </div>
+                        <Button 
+                          className={`rounded-full text-sm font-semibold ${
+                            followedLeagues.includes(league.id)
+                              ? "bg-mechitv-bg border border-mechitv-accent text-mechitv-accent hover:bg-mechitv-accent/10"
+                              : "bg-white text-black hover:bg-white/90"
+                          }`}
+                          onClick={() => toggleFollowLeague(league.id)}
+                        >
+                          {followedLeagues.includes(league.id) ? "Following" : "Follow"}
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                  <Button variant="ghost" className="text-mechitv-accent w-full mt-2">
+                    Show more leagues
+                  </Button>
+                </CardContent>
+              </Card>
+              
+              {/* Popular Teams to Follow */}
+              <Card className="bg-mechitv-bg-light border-border">
+                <CardContent className="p-4">
+                  <h3 className="font-bold text-lg mb-4">Popular Teams</h3>
+                  <div className="space-y-4">
+                    {popularTeams.map((team) => (
+                      <div key={team.id} className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <Avatar className="h-10 w-10 mr-3">
+                            <AvatarImage src={team.logo} alt={team.name} />
+                            <AvatarFallback>{team.name.charAt(0)}</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <p className="font-semibold">{team.name}</p>
+                            <p className="text-xs text-muted-foreground">{formatFollowerCount(team.followers)}</p>
+                          </div>
+                        </div>
+                        <Button 
+                          className={`rounded-full text-sm font-semibold ${
+                            followedTeams.includes(team.id)
+                              ? "bg-mechitv-bg border border-mechitv-accent text-mechitv-accent hover:bg-mechitv-accent/10"
+                              : "bg-white text-black hover:bg-white/90"
+                          }`}
+                          onClick={() => toggleFollowTeam(team.id)}
+                        >
+                          {followedTeams.includes(team.id) ? "Following" : "Follow"}
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                  <Button variant="ghost" className="text-mechitv-accent w-full mt-2">
+                    Show more teams
                   </Button>
                 </CardContent>
               </Card>

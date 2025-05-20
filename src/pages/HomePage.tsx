@@ -50,9 +50,6 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-mechitv-bg">
-      {/* Hero Section */}
-      <HeroSection />
-
       {/* Country Navigation */}
       <CountryNavigation 
         countries={countries} 
@@ -66,19 +63,22 @@ const HomePage = () => {
         activeCountry={activeCountry}
       />
 
-      {/* Highlights Section - SECOND as requested */}
+      {/* Hero Section - SECOND as requested */}
+      <HeroSection />
+
+      {/* Highlights Section */}
       <HighlightsSection highlights={highlights} />
 
-      {/* News Section - THIRD as requested */}
+      {/* News Section */}
       <NewsSection news={sportsNews} />
 
-      {/* Featured Content Banner - FOURTH as requested */}
+      {/* Featured Content Banner */}
       <FeatureBanner />
 
-      {/* Player Performance Section - FIFTH as requested */}
+      {/* Player Performance Section */}
       <PlayerPerformance />
 
-      {/* Popular Teams (inside TeamsAndMatches) - SIXTH as requested */}
+      {/* Popular Teams (inside TeamsAndMatches) */}
       <TeamsAndMatches teams={popularTeams} upcomingMatches={upcomingMatches} />
 
       {/* CTA Section */}
