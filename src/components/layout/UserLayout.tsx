@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
@@ -9,9 +9,11 @@ import {
   Bell,
   Flag,
   Play,
-  MessageSquare
+  MessageSquare,
+  X
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 // Create a custom SoccerIcon component as replacement for Football
 const SoccerIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -84,9 +86,55 @@ const UserLayout = ({ children }: UserLayoutProps) => {
               <Button size="sm" className="bg-mechitv-accent text-mechitv-bg hover:bg-mechitv-accent/90 hidden md:flex">
                 Sign Up
               </Button>
-              <Button variant="ghost" size="icon" className="md:hidden">
-                <Menu className="h-5 w-5" />
-              </Button>
+              
+              {/* Mobile Menu Sheet */}
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon" className="md:hidden">
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-[75vw] sm:w-[350px] bg-mechitv-bg-light p-0">
+                  <div className="flex flex-col h-full">
+                    <div className="p-4 border-b border-border">
+                      <div className="flex items-center justify-between">
+                        <Link to="/" className="flex items-center">
+                          <SoccerIcon className="h-5 w-5 text-mechitv-accent mr-2" />
+                          <span className="text-lg font-bold text-gradient">MechiTV</span>
+                        </Link>
+                      </div>
+                    </div>
+                    
+                    <nav className="flex flex-col p-4 space-y-4">
+                      <Link to="/" className="flex items-center p-2 rounded-md hover:bg-mechitv-bg">
+                        Home
+                      </Link>
+                      <Link to="/highlights" className="flex items-center p-2 rounded-md hover:bg-mechitv-bg">
+                        <Play className="h-4 w-4 mr-2" />
+                        Highlights
+                      </Link>
+                      <Link to="/news" className="flex items-center p-2 rounded-md hover:bg-mechitv-bg">
+                        News
+                      </Link>
+                      <Link to="/community" className="flex items-center p-2 rounded-md hover:bg-mechitv-bg">
+                        <MessageSquare className="h-4 w-4 mr-2" />
+                        Community
+                      </Link>
+                    </nav>
+                    
+                    <div className="mt-auto p-4 border-t border-border">
+                      <div className="flex gap-2 mb-4">
+                        <Button variant="outline" size="sm" className="flex-1">
+                          <User className="mr-2 h-4 w-4" /> Login
+                        </Button>
+                        <Button size="sm" className="flex-1 bg-mechitv-accent text-mechitv-bg hover:bg-mechitv-accent/90">
+                          Sign Up
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </SheetContent>
+              </Sheet>
             </div>
           </div>
         </div>
