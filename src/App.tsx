@@ -34,10 +34,10 @@ const App = () => (
         <Routes>
           {/* User-facing routes */}
           <Route path="/" element={<UserLayout><HomePage /></UserLayout>} />
-          <Route path="/news" element={<NewsPage />} />
-          <Route path="/news/:id" element={<BlogPostPage />} />
-          <Route path="/highlights" element={<HighlightsPage />} />
-          <Route path="/community" element={<CommunityPage />} />
+          <Route path="/news" element={<UserLayout><NewsPage /></UserLayout>} />
+          <Route path="/news/:id" element={<UserLayout><BlogPostPage /></UserLayout>} />
+          <Route path="/highlights" element={<UserLayout><HighlightsPage /></UserLayout>} />
+          <Route path="/community" element={<CommunityPage />} /> {/* Community page has its own layout */}
           
           {/* Admin routes */}
           <Route path="/admin" element={<AdminIndex />} />

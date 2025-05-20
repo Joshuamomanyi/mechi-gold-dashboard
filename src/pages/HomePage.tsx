@@ -4,9 +4,7 @@ import HeroSection from "@/components/home/HeroSection";
 import CountryNavigation from "@/components/home/CountryNavigation";
 import FeaturedMatches from "@/components/home/FeaturedMatches";
 import FeatureBanner from "@/components/home/FeatureBanner";
-import PopularLeagues from "@/components/home/PopularLeagues";
 import TeamsAndMatches from "@/components/home/TeamsAndMatches";
-import PricingSection from "@/components/home/PricingSection";
 import CTASection from "@/components/home/CTASection";
 import Footer from "@/components/home/Footer";
 import HighlightsSection from "@/components/home/HighlightsSection";
@@ -16,7 +14,6 @@ import PlayerPerformance from "@/components/home/PlayerPerformance";
 // Import data
 import { 
   featuredMatches as rawFeaturedMatches, 
-  popularLeagues, 
   popularTeams, 
   upcomingMatches, 
   countries,
@@ -83,12 +80,6 @@ const HomePage = () => {
 
       {/* Popular Teams (inside TeamsAndMatches) - SIXTH as requested */}
       <TeamsAndMatches teams={popularTeams} upcomingMatches={upcomingMatches} />
-
-      {/* Leagues Section */}
-      <PopularLeagues leagues={popularLeagues} />
-
-      {/* Pricing Section */}
-      <PricingSection />
 
       {/* CTA Section */}
       <CTASection />

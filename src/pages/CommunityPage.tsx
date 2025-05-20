@@ -1,13 +1,141 @@
 
 import React, { useState } from "react";
-import UserLayout from "@/components/layout/UserLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import { MessageSquare, Search, Users, Star, List, ChevronUp, Calendar, TagIcon } from "lucide-react";
+import { 
+  MessageSquare, 
+  Search, 
+  Users, 
+  Star, 
+  List, 
+  ChevronUp, 
+  Calendar, 
+  TagIcon,
+  Home,
+  Bell,
+  Mail,
+  User,
+  Bookmark,
+  MoreHorizontal,
+  Pencil,
+  Menu as MenuIcon
+} from "lucide-react";
+import {
+  SidebarProvider,
+  Sidebar,
+  SidebarContent,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarHeader,
+  SidebarFooter,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+
+// Custom sports icons
+const SoccerIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <circle cx="12" cy="12" r="10"></circle>
+    <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm6 5.8-2.8 4.8-1.4-1.4-4.8 2.8-1 4-4-1 2.8-4.8-1.4-1.4 4.8-2.8 1-4 4 1z"></path>
+  </svg>
+);
+
+const BasketballIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <circle cx="12" cy="12" r="10"></circle>
+    <path d="m4.93 4.93 4.24 4.24"></path>
+    <path d="m14.83 9.17 4.24-4.24"></path>
+    <path d="m14.83 14.83 4.24 4.24"></path>
+    <path d="m9.17 14.83-4.24 4.24"></path>
+    <path d="M12 2a10 10 0 0 0-8 4"></path>
+    <path d="M12 22a10 10 0 0 0 8-4"></path>
+  </svg>
+);
+
+const TennisIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <circle cx="12" cy="12" r="10"></circle>
+    <path d="M18.73 5.27a10 10 0 0 1 0 13.46"></path>
+    <path d="M5.27 5.27a10 10 0 0 0 0 13.46"></path>
+  </svg>
+);
+
+const BaseballIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M5.13 10.23C4.4 11.95 4 13.93 4 16c0 1.77.29 3.5.83 5"></path>
+    <path d="M9.13 6.23C7.4 5.5 5.43 5.1 3.35 5.1c-1.77 0-3.5.29-5 .83"></path>
+    <path d="M18.87 17.77c.73-1.72 1.13-3.7 1.13-5.77 0-1.77-.29-3.5-.83-5"></path>
+    <path d="M14.87 13.77C16.6 14.5 18.57 14.9 20.65 14.9c1.77 0 3.5-.29 5-.83"></path>
+    <path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10Z"></path>
+  </svg>
+);
+
+const F1Icon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M5 6h14M8 6v7c0 2-1 3-3 3"></path>
+    <path d="M19 14c-1.333 0-2-.667-2-2V9"></path>
+    <path d="M5 14h8"></path>
+  </svg>
+);
 
 // Mock forum discussions data
 const discussions = [
@@ -86,8 +214,23 @@ const activeUsers = [
   { id: 5, name: "DebateKing", avatar: "https://i.pravatar.cc/150?img=15", posts: 213 }
 ];
 
+// Sports categories for the sidebar
+const sportsCategories = [
+  { id: 1, name: "Home", icon: Home },
+  { id: 2, name: "Football", icon: SoccerIcon },
+  { id: 3, name: "Basketball", icon: BasketballIcon },
+  { id: 4, name: "Tennis", icon: TennisIcon },
+  { id: 5, name: "Baseball", icon: BaseballIcon },
+  { id: 6, name: "Formula 1", icon: F1Icon },
+  { id: 7, name: "Bookmarks", icon: Bookmark },
+  { id: 8, name: "Notifications", icon: Bell },
+  { id: 9, name: "Messages", icon: Mail },
+  { id: 10, name: "Profile", icon: User },
+];
+
 const CommunityPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   
   // Filter discussions based on search query
   const filteredDiscussions = discussions.filter(item => 
@@ -96,39 +239,68 @@ const CommunityPage = () => {
     item.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
   return (
-    <UserLayout>
-      <div className="min-h-screen bg-mechitv-bg">
-        {/* Community Hero Banner */}
-        <div className="bg-mechitv-bg-light py-12">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col items-center text-center mb-8">
-              <MessageSquare className="h-12 w-12 text-mechitv-accent mb-4" />
-              <h1 className="text-4xl font-bold text-white mb-2">Community Forum</h1>
-              <p className="text-muted-foreground max-w-2xl">
-                Join the conversation with fellow sports fans. Discuss matches, players, tactics, 
-                and everything sports-related in our friendly community.
-              </p>
-            </div>
+    <div className="min-h-screen bg-mechitv-bg">
+      <SidebarProvider defaultOpen={true}>
+        <div className="flex w-full">
+          {/* Sidebar */}
+          <Sidebar variant="floating" collapsible="icon">
+            <SidebarHeader className="flex items-center justify-between p-4">
+              <div className="flex items-center">
+                <SoccerIcon className="h-8 w-8 text-mechitv-accent" />
+                <span className="ml-2 text-xl font-bold text-gradient">MechiTV</span>
+              </div>
+            </SidebarHeader>
+            <SidebarContent>
+              <SidebarMenu>
+                {sportsCategories.map((category) => (
+                  <SidebarMenuItem key={category.id}>
+                    <SidebarMenuButton
+                      tooltip={category.name}
+                      className="flex items-center space-x-3 px-4 py-3 hover:bg-mechitv-accent/10"
+                    >
+                      <category.icon className="h-6 w-6 text-mechitv-accent" />
+                      <span>{category.name}</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarContent>
+            <SidebarFooter className="p-4">
+              <Button className="w-full bg-mechitv-accent hover:bg-mechitv-accent/90" size="lg">
+                <Pencil className="mr-2 h-5 w-5" />
+                <span>Post</span>
+              </Button>
+            </SidebarFooter>
+          </Sidebar>
+
+          {/* Main Content */}
+          <div className="flex-1 min-w-0">
+            {/* Community Header */}
+            <header className="sticky top-0 z-10 bg-mechitv-bg-light border-b border-border p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <SidebarTrigger className="mr-4" />
+                  <h1 className="text-xl font-bold">Community</h1>
+                </div>
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input 
+                    placeholder="Search discussions..." 
+                    className="pl-9 bg-mechitv-bg border-border focus-visible:ring-mechitv-accent w-64"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                </div>
+              </div>
+            </header>
             
-            {/* Search Bar */}
-            <div className="max-w-xl mx-auto relative mb-8">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input 
-                placeholder="Search discussions..." 
-                className="pl-9 bg-mechitv-bg border-border focus-visible:ring-mechitv-accent"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-          </div>
-        </div>
-        
-        {/* Community Content */}
-        <div className="container mx-auto px-4 py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            {/* Main Content - Discussions */}
-            <div className="lg:col-span-3">
+            {/* Community Content */}
+            <div className="p-4">
               {/* Category Tabs */}
               <Tabs defaultValue="all" className="w-full mb-8">
                 <div className="flex justify-between items-center mb-4">
@@ -137,7 +309,7 @@ const CommunityPage = () => {
                       value="all"
                       className="data-[state=active]:bg-mechitv-accent data-[state=active]:text-mechitv-bg"
                     >
-                      All Discussions
+                      For You
                     </TabsTrigger>
                     <TabsTrigger 
                       value="trending"
@@ -149,85 +321,83 @@ const CommunityPage = () => {
                       value="popular"
                       className="data-[state=active]:bg-mechitv-accent data-[state=active]:text-mechitv-bg"
                     >
-                      Popular
-                    </TabsTrigger>
-                    <TabsTrigger 
-                      value="unanswered"
-                      className="data-[state=active]:bg-mechitv-accent data-[state=active]:text-mechitv-bg"
-                    >
-                      Unanswered
+                      Following
                     </TabsTrigger>
                   </TabsList>
-                  
-                  <Button className="bg-mechitv-accent text-mechitv-bg hover:bg-mechitv-accent/90">
-                    <MessageSquare className="mr-2 h-4 w-4" /> New Discussion
-                  </Button>
                 </div>
                 
                 <TabsContent value="all" className="mt-0 animate-fade-in">
-                  <Card className="bg-mechitv-bg-light border-border">
-                    <CardContent className="p-0">
-                      {filteredDiscussions.length > 0 ? (
-                        filteredDiscussions.map((discussion, index) => (
-                          <React.Fragment key={discussion.id}>
-                            <div className="p-4 hover:bg-mechitv-bg/20 transition-colors cursor-pointer">
-                              <div className="flex items-start">
-                                <div className="hidden sm:block mr-4">
-                                  <Avatar className="h-10 w-10">
-                                    <AvatarImage src={discussion.avatar} alt={discussion.author} />
-                                    <AvatarFallback>{discussion.author.charAt(0)}</AvatarFallback>
-                                  </Avatar>
-                                </div>
-                                <div className="flex-1">
-                                  <h3 className="font-semibold text-white hover:text-mechitv-accent transition-colors">
-                                    {discussion.title}
-                                  </h3>
-                                  <div className="flex flex-wrap items-center text-xs text-muted-foreground mt-1 gap-2">
-                                    <span>{discussion.author}</span>
-                                    <span>•</span>
-                                    <span>{discussion.date}</span>
-                                  </div>
-                                  <p className="text-muted-foreground text-sm mt-2 line-clamp-2">
-                                    {discussion.content}
-                                  </p>
-                                  <div className="flex flex-wrap gap-2 mt-3">
-                                    {discussion.tags.map((tag, i) => (
-                                      <span key={i} className="bg-mechitv-bg text-xs px-2 py-1 rounded">
-                                        {tag}
-                                      </span>
-                                    ))}
-                                  </div>
-                                </div>
-                                <div className="hidden md:flex flex-col items-end ml-4 min-w-[100px] text-right">
-                                  <div className="flex items-center text-mechitv-accent">
-                                    <MessageSquare className="h-4 w-4 mr-1" />
-                                    <span className="text-sm">{discussion.replies}</span>
-                                  </div>
-                                  <span className="text-xs text-muted-foreground mt-1">
-                                    {discussion.views} views
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                            {index < filteredDiscussions.length - 1 && (
-                              <Separator className="bg-border" />
-                            )}
-                          </React.Fragment>
-                        ))
-                      ) : (
-                        <div className="text-center py-12">
-                          <p className="text-muted-foreground">No discussions found</p>
+                  <Card className="bg-mechitv-bg-light border-border mb-4">
+                    <CardContent className="p-4">
+                      <div className="flex">
+                        <Avatar className="h-12 w-12 mr-4">
+                          <AvatarImage src="https://i.pravatar.cc/150?img=33" alt="Your Avatar" />
+                          <AvatarFallback>YA</AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1">
+                          <Input 
+                            placeholder="What's happening in sports today?" 
+                            className="bg-mechitv-bg border-border focus-visible:ring-mechitv-accent"
+                          />
+                          <div className="flex justify-end mt-2">
+                            <Button className="bg-mechitv-accent text-mechitv-bg hover:bg-mechitv-accent/90">
+                              Post
+                            </Button>
+                          </div>
                         </div>
-                      )}
+                      </div>
                     </CardContent>
                   </Card>
+                
+                  {filteredDiscussions.map((discussion) => (
+                    <Card key={discussion.id} className="bg-mechitv-bg-light border-border mb-4">
+                      <CardContent className="p-4">
+                        <div className="flex">
+                          <Avatar className="h-12 w-12 mr-4">
+                            <AvatarImage src={discussion.avatar} alt={discussion.author} />
+                            <AvatarFallback>{discussion.author.charAt(0)}</AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1">
+                            <div className="flex items-center">
+                              <span className="font-semibold mr-2">{discussion.author}</span>
+                              <span className="text-muted-foreground text-sm">@{discussion.author.toLowerCase()} · {discussion.date}</span>
+                            </div>
+                            <p className="mt-2 mb-3">{discussion.content}</p>
+                            <div className="flex flex-wrap gap-2 mb-3">
+                              {discussion.tags.map((tag, i) => (
+                                <span key={i} className="bg-mechitv-bg text-xs px-2 py-1 rounded text-mechitv-accent">
+                                  #{tag.replace(/\s+/g, '')}
+                                </span>
+                              ))}
+                            </div>
+                            <div className="flex justify-between text-muted-foreground">
+                              <Button variant="ghost" size="sm" className="hover:text-mechitv-accent">
+                                <MessageSquare className="h-4 w-4 mr-2" />
+                                <span>{discussion.replies}</span>
+                              </Button>
+                              <Button variant="ghost" size="sm" className="hover:text-mechitv-accent">
+                                <Star className="h-4 w-4 mr-2" />
+                                <span>{Math.floor(discussion.views / 10)}</span>
+                              </Button>
+                              <Button variant="ghost" size="sm" className="hover:text-mechitv-accent">
+                                <Bookmark className="h-4 w-4" />
+                              </Button>
+                              <Button variant="ghost" size="sm" className="hover:text-mechitv-accent">
+                                <MoreHorizontal className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
                 </TabsContent>
                 
                 <TabsContent value="trending" className="mt-0 animate-fade-in">
                   <Card className="bg-mechitv-bg-light border-border">
                     <CardContent className="p-6">
                       <p className="text-center text-muted-foreground">
-                        The same layout as "All Discussions" but with trending content
+                        The same layout as "For You" but with trending content
                       </p>
                     </CardContent>
                   </Card>
@@ -237,199 +407,78 @@ const CommunityPage = () => {
                   <Card className="bg-mechitv-bg-light border-border">
                     <CardContent className="p-6">
                       <p className="text-center text-muted-foreground">
-                        The same layout as "All Discussions" but with popular content
-                      </p>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-                
-                <TabsContent value="unanswered" className="mt-0 animate-fade-in">
-                  <Card className="bg-mechitv-bg-light border-border">
-                    <CardContent className="p-6">
-                      <p className="text-center text-muted-foreground">
-                        The same layout as "All Discussions" but with unanswered content
+                        Posts from accounts you follow
                       </p>
                     </CardContent>
                   </Card>
                 </TabsContent>
               </Tabs>
-              
-              {/* Featured Discussion */}
-              <div className="mb-8">
-                <h2 className="text-xl font-bold text-white mb-4">Featured Discussion</h2>
-                <Card className="bg-mechitv-bg-light border-border border-l-4 border-l-mechitv-accent">
-                  <CardContent className="p-6">
-                    <div className="flex items-start">
-                      <Avatar className="h-12 w-12 mr-4">
-                        <AvatarImage src="https://i.pravatar.cc/150?img=20" alt="Featured User" />
-                        <AvatarFallback>FU</AvatarFallback>
-                      </Avatar>
-                      <div className="flex-1">
-                        <div className="flex justify-between">
-                          <h3 className="font-semibold text-lg text-white">The impact of new transfer regulations on smaller clubs</h3>
-                          <span className="bg-mechitv-accent/20 text-mechitv-accent text-xs px-2 py-1 rounded">Featured</span>
-                        </div>
-                        <div className="flex items-center text-xs text-muted-foreground mt-1">
-                          <span className="font-medium">SportsEconomist</span>
-                          <span className="mx-2">•</span>
-                          <span>5 hours ago</span>
-                          <span className="mx-2">•</span>
-                          <span className="flex items-center">
-                            <MessageSquare className="h-3 w-3 mr-1" /> 78 replies
-                          </span>
-                        </div>
-                        <p className="text-muted-foreground mt-3">
-                          The recent changes to transfer regulations are set to have significant effects on smaller 
-                          clubs. Will these changes level the playing field or make the gap between rich and poor clubs even wider?
-                        </p>
-                        <div className="flex flex-wrap gap-2 mt-4">
-                          <span className="bg-mechitv-bg text-xs px-2 py-1 rounded">Transfers</span>
-                          <span className="bg-mechitv-bg text-xs px-2 py-1 rounded">Economics</span>
-                          <span className="bg-mechitv-bg text-xs px-2 py-1 rounded">Regulations</span>
-                        </div>
-                        <div className="mt-4">
-                          <Button variant="outline" className="text-mechitv-accent border-mechitv-accent hover:bg-mechitv-accent hover:text-mechitv-bg">
-                            Join Discussion
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-              
-              {/* Community Stats */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                <Card className="bg-mechitv-bg-light border-border">
-                  <CardContent className="p-4 text-center">
-                    <Users className="h-8 w-8 text-mechitv-accent mx-auto mb-2" />
-                    <h3 className="text-xl font-bold text-white">10,482</h3>
-                    <p className="text-muted-foreground text-sm">Active Members</p>
-                  </CardContent>
-                </Card>
-                <Card className="bg-mechitv-bg-light border-border">
-                  <CardContent className="p-4 text-center">
-                    <MessageSquare className="h-8 w-8 text-mechitv-accent mx-auto mb-2" />
-                    <h3 className="text-xl font-bold text-white">24,159</h3>
-                    <p className="text-muted-foreground text-sm">Discussions</p>
-                  </CardContent>
-                </Card>
-                <Card className="bg-mechitv-bg-light border-border">
-                  <CardContent className="p-4 text-center">
-                    <Calendar className="h-8 w-8 text-mechitv-accent mx-auto mb-2" />
-                    <h3 className="text-xl font-bold text-white">312</h3>
-                    <p className="text-muted-foreground text-sm">New Posts Today</p>
-                  </CardContent>
-                </Card>
-              </div>
             </div>
-            
-            {/* Sidebar */}
-            <div className="space-y-8">
-              {/* Category Filter */}
-              <Card className="bg-mechitv-bg-light border-border">
-                <CardContent className="p-4">
-                  <h3 className="text-lg font-bold text-white mb-3">Categories</h3>
-                  <div className="space-y-2">
-                    <Button variant="ghost" className="w-full justify-start">
-                      <List className="h-4 w-4 mr-2" /> All Categories
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start">
-                      <TagIcon className="h-4 w-4 mr-2" /> Football
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start">
-                      <TagIcon className="h-4 w-4 mr-2" /> Basketball
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start">
-                      <TagIcon className="h-4 w-4 mr-2" /> Tennis
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start">
-                      <TagIcon className="h-4 w-4 mr-2" /> Rugby
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start">
-                      <TagIcon className="h-4 w-4 mr-2" /> Formula 1
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+          </div>
+          
+          {/* Right Sidebar (Who to follow, trends) */}
+          <div className="hidden lg:block w-80 p-4 border-l border-border">
+            <div className="mb-6">
+              <div className="relative mb-4">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input 
+                  placeholder="Search MechiTV" 
+                  className="pl-9 bg-mechitv-bg border-border focus-visible:ring-mechitv-accent"
+                />
+              </div>
               
-              {/* Popular Topics */}
-              <Card className="bg-mechitv-bg-light border-border">
+              {/* Trending Topics */}
+              <Card className="bg-mechitv-bg-light border-border mb-6">
                 <CardContent className="p-4">
-                  <h3 className="text-lg font-bold text-white mb-3">Popular Topics</h3>
-                  <div className="space-y-2">
+                  <h3 className="font-bold text-lg mb-4">Trends for you</h3>
+                  <div className="space-y-4">
                     {popularTopics.map((topic) => (
-                      <div key={topic.id} className="flex justify-between items-center py-2 border-b border-border last:border-0">
-                        <span className="text-muted-foreground hover:text-mechitv-accent transition-colors cursor-pointer">
-                          {topic.name}
-                        </span>
-                        <span className="bg-mechitv-bg text-xs px-2 py-1 rounded">
-                          {topic.count}
-                        </span>
+                      <div key={topic.id} className="hover:bg-mechitv-accent/10 p-2 rounded-md cursor-pointer">
+                        <p className="text-xs text-muted-foreground">Trending in Sports</p>
+                        <p className="font-semibold">{topic.name}</p>
+                        <p className="text-xs text-muted-foreground">{topic.count} posts</p>
                       </div>
                     ))}
                   </div>
+                  <Button variant="ghost" className="text-mechitv-accent w-full mt-2">
+                    Show more
+                  </Button>
                 </CardContent>
               </Card>
               
-              {/* Top Members */}
+              {/* Who to follow */}
               <Card className="bg-mechitv-bg-light border-border">
                 <CardContent className="p-4">
-                  <h3 className="text-lg font-bold text-white mb-3">Top Contributors</h3>
+                  <h3 className="font-bold text-lg mb-4">Who to follow</h3>
                   <div className="space-y-4">
-                    {activeUsers.map((user) => (
+                    {activeUsers.slice(0, 3).map((user) => (
                       <div key={user.id} className="flex items-center justify-between">
                         <div className="flex items-center">
-                          <Avatar className="h-8 w-8 mr-3">
+                          <Avatar className="h-10 w-10 mr-3">
                             <AvatarImage src={user.avatar} alt={user.name} />
                             <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
                           </Avatar>
-                          <span className="text-sm">{user.name}</span>
+                          <div>
+                            <p className="font-semibold">{user.name}</p>
+                            <p className="text-xs text-muted-foreground">@{user.name.toLowerCase()}</p>
+                          </div>
                         </div>
-                        <div className="flex items-center text-xs text-muted-foreground">
-                          <span>{user.posts} posts</span>
-                          <Star className="h-3 w-3 ml-1 text-mechitv-accent" />
-                        </div>
+                        <Button className="bg-white text-black hover:bg-white/90 rounded-full text-sm font-semibold">
+                          Follow
+                        </Button>
                       </div>
                     ))}
                   </div>
-                </CardContent>
-              </Card>
-              
-              {/* Trending Tags */}
-              <Card className="bg-mechitv-bg-light border-border">
-                <CardContent className="p-4">
-                  <h3 className="text-lg font-bold text-white mb-3">Trending Tags</h3>
-                  <div className="flex flex-wrap gap-2">
-                    <Button variant="outline" size="sm" className="rounded-full text-xs flex items-center">
-                      #TransferWindow <ChevronUp className="ml-1 h-3 w-3 text-mechitv-accent" />
-                    </Button>
-                    <Button variant="outline" size="sm" className="rounded-full text-xs flex items-center">
-                      #ChampionsLeague <ChevronUp className="ml-1 h-3 w-3 text-mechitv-accent" />
-                    </Button>
-                    <Button variant="outline" size="sm" className="rounded-full text-xs">
-                      #PreSeason
-                    </Button>
-                    <Button variant="outline" size="sm" className="rounded-full text-xs flex items-center">
-                      #MVP <ChevronUp className="ml-1 h-3 w-3 text-mechitv-accent" />
-                    </Button>
-                    <Button variant="outline" size="sm" className="rounded-full text-xs">
-                      #Injuries
-                    </Button>
-                    <Button variant="outline" size="sm" className="rounded-full text-xs">
-                      #CoachingChanges
-                    </Button>
-                    <Button variant="outline" size="sm" className="rounded-full text-xs">
-                      #LeagueRankings
-                    </Button>
-                  </div>
+                  <Button variant="ghost" className="text-mechitv-accent w-full mt-2">
+                    Show more
+                  </Button>
                 </CardContent>
               </Card>
             </div>
           </div>
         </div>
-      </div>
-    </UserLayout>
+      </SidebarProvider>
+    </div>
   );
 };
 
