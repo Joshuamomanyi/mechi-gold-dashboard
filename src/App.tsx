@@ -11,6 +11,8 @@ import NewsPage from "./pages/NewsPage";
 import BlogPostPage from "./pages/BlogPostPage";
 import HighlightsPage from "./pages/HighlightsPage";
 import CommunityPage from "./pages/CommunityPage";
+import SinglePostPage from "./pages/SinglePostPage";
+import SingleHighlightPage from "./pages/SingleHighlightPage";
 
 // Admin pages
 import AdminIndex from "./pages/Index"; // Renamed to distinguish from the main HomePage
@@ -35,8 +37,10 @@ const App = () => (
           {/* User-facing routes */}
           <Route path="/" element={<UserLayout><HomePage /></UserLayout>} />
           <Route path="/news" element={<UserLayout><NewsPage /></UserLayout>} />
-          <Route path="/news/:id" element={<UserLayout><BlogPostPage /></UserLayout>} />
+          <Route path="/news/:id" element={<BlogPostPage />} />
+          <Route path="/post/:id" element={<SinglePostPage />} />
           <Route path="/highlights" element={<UserLayout><HighlightsPage /></UserLayout>} />
+          <Route path="/highlight/:id" element={<SingleHighlightPage />} />
           <Route path="/community" element={<CommunityPage />} /> {/* Community page has its own layout */}
           
           {/* Admin routes */}
