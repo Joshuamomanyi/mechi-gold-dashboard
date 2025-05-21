@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Play, Search, Clock, Calendar, ChevronRight } from "lucide-react";
 import { highlights } from "@/components/home/data";
+import { Link } from "react-router-dom";
 
 // Example categories for highlights
 const categories = ["All", "Football", "Basketball", "Tennis", "Rugby", "Formula 1"];
@@ -74,38 +75,40 @@ const HighlightsPage = () => {
                         key={highlight.id} 
                         className="bg-mechitv-bg-light border-border hover:border-mechitv-accent/50 transition-all group"
                       >
-                        <div className="aspect-video overflow-hidden relative">
-                          <img 
-                            src={highlight.image} 
-                            alt={highlight.title} 
-                            className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-300" 
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                          <Button
-                            size="icon"
-                            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-mechitv-accent text-mechitv-bg rounded-full opacity-90 group-hover:opacity-100 transition-opacity"
-                          >
-                            <Play className="h-6 w-6" />
-                            <span className="sr-only">Watch Now</span>
-                          </Button>
-                          <div className="absolute top-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded">
-                            {highlight.duration}
+                        <Link to={`/highlight/${highlight.id}`}>
+                          <div className="aspect-video overflow-hidden relative">
+                            <img 
+                              src={highlight.image} 
+                              alt={highlight.title} 
+                              className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-300" 
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                            <Button
+                              size="icon"
+                              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-mechitv-accent text-mechitv-bg rounded-full opacity-90 group-hover:opacity-100 transition-opacity"
+                            >
+                              <Play className="h-6 w-6" />
+                              <span className="sr-only">Watch Now</span>
+                            </Button>
+                            <div className="absolute top-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded">
+                              {highlight.duration}
+                            </div>
                           </div>
-                        </div>
-                        <CardContent className="p-4">
-                          <h3 className="font-semibold text-white line-clamp-1">{highlight.title}</h3>
-                          <p className="text-muted-foreground text-sm mt-1 line-clamp-2">
-                            {highlight.description}
-                          </p>
-                          <div className="flex justify-between items-center mt-3 text-xs text-muted-foreground">
-                            <span className="flex items-center">
-                              <Calendar className="h-3 w-3 mr-1" /> 3 days ago
-                            </span>
-                            <span className="flex items-center">
-                              <Clock className="h-3 w-3 mr-1" /> {highlight.duration}
-                            </span>
-                          </div>
-                        </CardContent>
+                          <CardContent className="p-4">
+                            <h3 className="font-semibold text-white line-clamp-1">{highlight.title}</h3>
+                            <p className="text-muted-foreground text-sm mt-1 line-clamp-2">
+                              {highlight.description}
+                            </p>
+                            <div className="flex justify-between items-center mt-3 text-xs text-muted-foreground">
+                              <span className="flex items-center">
+                                <Calendar className="h-3 w-3 mr-1" /> 3 days ago
+                              </span>
+                              <span className="flex items-center">
+                                <Clock className="h-3 w-3 mr-1" /> {highlight.duration}
+                              </span>
+                            </div>
+                          </CardContent>
+                        </Link>
                       </Card>
                     ))}
                 </div>
@@ -135,13 +138,15 @@ const HighlightsPage = () => {
                     className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                  <Button
-                    size="icon"
-                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-mechitv-accent text-mechitv-bg rounded-full w-16 h-16 opacity-90 group-hover:opacity-100 transition-opacity"
-                  >
-                    <Play className="h-8 w-8" />
-                    <span className="sr-only">Watch Now</span>
-                  </Button>
+                  <Link to="/highlight/1">
+                    <Button
+                      size="icon"
+                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-mechitv-accent text-mechitv-bg rounded-full w-16 h-16 opacity-90 group-hover:opacity-100 transition-opacity"
+                    >
+                      <Play className="h-8 w-8" />
+                      <span className="sr-only">Watch Now</span>
+                    </Button>
+                  </Link>
                   <div className="absolute top-4 right-4 bg-black/60 text-white text-xs px-2 py-1 rounded">
                     10:32
                   </div>
@@ -170,9 +175,11 @@ const HighlightsPage = () => {
                     </p>
                   </div>
                   
-                  <Button className="bg-mechitv-accent text-mechitv-bg hover:bg-mechitv-accent/90 w-full">
-                    <Play className="mr-2 h-4 w-4" /> Watch Highlight
-                  </Button>
+                  <Link to="/highlight/1">
+                    <Button className="bg-mechitv-accent text-mechitv-bg hover:bg-mechitv-accent/90 w-full">
+                      <Play className="mr-2 h-4 w-4" /> Watch Highlight
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </Card>
@@ -191,9 +198,11 @@ const HighlightsPage = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
                     <h3 className="text-xl font-bold text-white mb-2">{category}</h3>
-                    <Button variant="outline" className="text-white border-white bg-transparent hover:bg-white/20">
-                      Browse <ChevronRight className="ml-1 h-4 w-4" />
-                    </Button>
+                    <Link to="/highlights">
+                      <Button variant="outline" className="text-white border-white bg-transparent hover:bg-white/20">
+                        Browse <ChevronRight className="ml-1 h-4 w-4" />
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </Card>

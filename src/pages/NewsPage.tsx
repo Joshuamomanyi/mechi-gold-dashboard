@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Search, FileText, Calendar, Clock, MessageSquare, Bookmark } from "lucide-react";
 import { sportsNews } from "@/components/home/data";
+import { Link } from "react-router-dom";
 
 const NewsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -71,42 +72,44 @@ const NewsPage = () => {
                       key={item.id} 
                       className="bg-mechitv-bg-light border-border hover:border-mechitv-accent/50 transition-all group"
                     >
-                      <div className="aspect-video overflow-hidden relative">
-                        <img 
-                          src={item.image} 
-                          alt={item.title} 
-                          className="w-full h-full object-cover hover:scale-105 transition-transform" 
-                        />
-                        <div className="absolute top-3 left-3">
-                          <span className="bg-mechitv-accent text-black text-xs font-medium px-2 py-1 rounded">
-                            {item.category}
-                          </span>
-                        </div>
-                      </div>
-                      <CardContent className="p-4">
-                        <div className="flex justify-between items-center mb-2">
-                          <div className="flex items-center space-x-2 text-muted-foreground text-xs">
-                            <span className="flex items-center">
-                              <Calendar className="h-3 w-3 mr-1" /> {item.date}
+                      <Link to={`/post/${item.id}`}>
+                        <div className="aspect-video overflow-hidden relative">
+                          <img 
+                            src={item.image} 
+                            alt={item.title} 
+                            className="w-full h-full object-cover hover:scale-105 transition-transform" 
+                          />
+                          <div className="absolute top-3 left-3">
+                            <span className="bg-mechitv-accent text-black text-xs font-medium px-2 py-1 rounded">
+                              {item.category}
                             </span>
                           </div>
-                          <Button variant="ghost" size="icon" className="h-8 w-8">
-                            <Bookmark className="h-4 w-4" />
-                          </Button>
                         </div>
-                        <h3 className="font-semibold text-lg text-white mb-2">{item.title}</h3>
-                        <p className="text-muted-foreground text-sm mb-4">
-                          {item.excerpt}
-                        </p>
-                        <div className="flex justify-between items-center">
-                          <Button variant="link" className="text-mechitv-accent p-0 h-auto">
-                            Read More
-                          </Button>
-                          <div className="flex items-center text-xs text-muted-foreground">
-                            <MessageSquare className="h-3 w-3 mr-1" /> 24 Comments
+                        <CardContent className="p-4">
+                          <div className="flex justify-between items-center mb-2">
+                            <div className="flex items-center space-x-2 text-muted-foreground text-xs">
+                              <span className="flex items-center">
+                                <Calendar className="h-3 w-3 mr-1" /> {item.date}
+                              </span>
+                            </div>
+                            <Button variant="ghost" size="icon" className="h-8 w-8">
+                              <Bookmark className="h-4 w-4" />
+                            </Button>
                           </div>
-                        </div>
-                      </CardContent>
+                          <h3 className="font-semibold text-lg text-white mb-2">{item.title}</h3>
+                          <p className="text-muted-foreground text-sm mb-4">
+                            {item.excerpt}
+                          </p>
+                          <div className="flex justify-between items-center">
+                            <Button variant="link" className="text-mechitv-accent p-0 h-auto">
+                              Read More
+                            </Button>
+                            <div className="flex items-center text-xs text-muted-foreground">
+                              <MessageSquare className="h-3 w-3 mr-1" /> 24 Comments
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Link>
                     </Card>
                   ))}
               </div>
@@ -173,9 +176,11 @@ const NewsPage = () => {
                 </div>
                 
                 <div className="flex justify-between items-center mt-4">
-                  <Button variant="link" className="text-mechitv-accent p-0 h-auto">
-                    Read Full Article
-                  </Button>
+                  <Link to="/post/1">
+                    <Button variant="link" className="text-mechitv-accent p-0 h-auto">
+                      Read Full Article
+                    </Button>
+                  </Link>
                   <div className="flex items-center space-x-2">
                     <Button variant="ghost" size="icon" className="h-8 w-8">
                       <MessageSquare className="h-4 w-4" />
