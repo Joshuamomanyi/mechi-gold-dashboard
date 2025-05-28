@@ -10,7 +10,9 @@ import {
   Flag,
   Play,
   MessageSquare,
-  X
+  X,
+  Ticket,
+  ShoppingBag
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -59,6 +61,18 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                   </span>
                 </Link>
                 <Link to="/news" className="text-sm hover:text-mechitv-accent">News</Link>
+                <Link to="/ticketing" className="text-sm hover:text-mechitv-accent">
+                  <span className="flex items-center">
+                    <Ticket className="h-4 w-4 mr-1" />
+                    Tickets
+                  </span>
+                </Link>
+                <Link to="/store" className="text-sm hover:text-mechitv-accent">
+                  <span className="flex items-center">
+                    <ShoppingBag className="h-4 w-4 mr-1" />
+                    Store
+                  </span>
+                </Link>
                 <Link to="/community" className="text-sm hover:text-mechitv-accent">
                   <span className="flex items-center">
                     <MessageSquare className="h-4 w-4 mr-1" />
@@ -115,6 +129,14 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                       </Link>
                       <Link to="/news" className="flex items-center p-2 rounded-md hover:bg-mechitv-bg">
                         News
+                      </Link>
+                      <Link to="/ticketing" className="flex items-center p-2 rounded-md hover:bg-mechitv-bg">
+                        <Ticket className="h-4 w-4 mr-2" />
+                        Tickets
+                      </Link>
+                      <Link to="/store" className="flex items-center p-2 rounded-md hover:bg-mechitv-bg">
+                        <ShoppingBag className="h-4 w-4 mr-2" />
+                        Store
                       </Link>
                       <Link to="/community" className="flex items-center p-2 rounded-md hover:bg-mechitv-bg">
                         <MessageSquare className="h-4 w-4 mr-2" />
