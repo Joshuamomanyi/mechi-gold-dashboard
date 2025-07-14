@@ -18,9 +18,13 @@ import {
   CreditCard,
   Shield
 } from "lucide-react";
+import { useCart } from '@/contexts/CartContext';
+import { useToast } from '@/hooks/use-toast';
 
 const TicketingPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const { addItem } = useCart();
+  const { toast } = useToast();
 
   const upcomingMatches = [
     {
@@ -72,6 +76,23 @@ const TicketingPage = () => {
       ]
     }
   ];
+
+  const handleBuyTicket = (match: any) => {
+    addItem({
+      id: `ticket-${match.id}`,
+      type: 'ticket',
+      name: `${match.homeTeam} vs ${match.awayTeam}`,
+      price: match.ticketPrices[0].price,
+      match: `${match.homeTeam} vs ${match.awayTeam}`,
+      date: `${match.date} at ${match.time}`,
+      venue: match.venue
+    });
+    
+    toast({
+      title: "Ticket Added to Cart",
+      description: `${match.homeTeam} vs ${match.awayTeam} ticket added successfully!`,
+    });
+  };
 
   return (
     <div className="min-h-screen bg-mechitv-bg">
@@ -160,7 +181,10 @@ const TicketingPage = () => {
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full mt-4 bg-mechitv-accent text-mechitv-bg hover:bg-mechitv-accent/90">
+                  <Button 
+                    className="w-full mt-4 bg-mechitv-accent text-mechitv-bg hover:bg-mechitv-accent/90"
+                    onClick={() => handleBuyTicket(match)}
+                  >
                     <Ticket className="mr-2 h-4 w-4" />
                     Book Tickets
                   </Button>

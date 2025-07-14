@@ -12,8 +12,10 @@ import {
   MessageSquare,
   X,
   Ticket,
-  ShoppingBag
+  ShoppingBag,
+  ShoppingCart
 } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -41,6 +43,8 @@ interface UserLayoutProps {
 }
 
 const UserLayout = ({ children }: UserLayoutProps) => {
+  const { getTotalItems } = useCart();
+  
   return (
     <div className="min-h-screen bg-mechitv-bg text-foreground">
       {/* Navigation header */}
@@ -94,6 +98,16 @@ const UserLayout = ({ children }: UserLayoutProps) => {
               <Button variant="ghost" size="icon" className="lg:hidden">
                 <Search className="h-5 w-5" />
               </Button>
+              <Link to="/cart">
+                <Button variant="ghost" size="icon" className="relative">
+                  <ShoppingCart className="h-5 w-5" />
+                  {getTotalItems() > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-mechitv-accent text-mechitv-bg text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      {getTotalItems()}
+                    </span>
+                  )}
+                </Button>
+              </Link>
               <Button variant="outline" size="sm" className="hidden md:flex">
                 <User className="mr-2 h-4 w-4" /> Login
               </Button>
@@ -137,6 +151,15 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                       <Link to="/store" className="flex items-center p-2 rounded-md hover:bg-mechitv-bg">
                         <ShoppingBag className="h-4 w-4 mr-2" />
                         Store
+                      </Link>
+                      <Link to="/cart" className="flex items-center p-2 rounded-md hover:bg-mechitv-bg relative">
+                        <ShoppingCart className="h-4 w-4 mr-2" />
+                        Cart
+                        {getTotalItems() > 0 && (
+                          <span className="ml-auto bg-mechitv-accent text-mechitv-bg text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                            {getTotalItems()}
+                          </span>
+                        )}
                       </Link>
                       <Link to="/community" className="flex items-center p-2 rounded-md hover:bg-mechitv-bg">
                         <MessageSquare className="h-4 w-4 mr-2" />

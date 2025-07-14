@@ -15,6 +15,8 @@ import SinglePostPage from "./pages/SinglePostPage";
 import SingleHighlightPage from "./pages/SingleHighlightPage";
 import TicketingPage from "./pages/TicketingPage";
 import JerseyStorePage from "./pages/JerseyStorePage";
+import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 // Admin pages
 import AdminIndex from "./pages/Index"; // Renamed to distinguish from the main HomePage
@@ -46,6 +48,8 @@ const App = () => (
           <Route path="/community" element={<CommunityPage />} /> {/* Community page has its own layout */}
           <Route path="/ticketing" element={<UserLayout><TicketingPage /></UserLayout>} />
           <Route path="/store" element={<UserLayout><JerseyStorePage /></UserLayout>} />
+          <Route path="/cart" element={<UserLayout><CartPage /></UserLayout>} />
+          <Route path="/checkout" element={<UserLayout><CheckoutPage /></UserLayout>} />
           
           {/* Admin routes */}
           <Route path="/admin" element={<AdminIndex />} />

@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { 
   ShoppingCart, 
   Search, 
@@ -16,9 +17,14 @@ import {
   RotateCcw,
   Shirt
 } from "lucide-react";
+import { useCart } from '@/contexts/CartContext';
+import { useToast } from '@/hooks/use-toast';
 
 const JerseyStorePage = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedSize, setSelectedSize] = useState<{[key: string]: string}>({});
+  const { addItem } = useCart();
+  const { toast } = useToast();
 
   const jerseys = [
     {
@@ -106,6 +112,23 @@ const JerseyStorePage = () => {
       sizes: ["S", "M", "L", "XL"]
     }
   ];
+
+  const handleAddToCart = (jersey: any) => {
+    const size = selectedSize[jersey.id] || 'M';
+    addItem({
+      id: `jersey-${jersey.id}-${size}`,
+      type: 'jersey',
+      name: `${jersey.team} ${jersey.type} Jersey`,
+      price: jersey.price,
+      image: jersey.image,
+      size: size
+    });
+    
+    toast({
+      title: "Jersey Added to Cart",
+      description: `${jersey.team} ${jersey.type} Jersey (Size ${size}) added successfully!`,
+    });
+  };
 
   const categories = ["All", "Premier League", "La Liga", "Champions League", "National Teams"];
 
@@ -216,16 +239,26 @@ const JerseyStorePage = () => {
                         </div>
                       </div>
                       
-                      <div className="flex gap-2 mb-3">
-                        <select className="flex-1 bg-mechitv-bg border border-border rounded px-2 py-1 text-white text-sm">
-                          <option value="">Size</option>
-                          {jersey.sizes.map((size) => (
-                            <option key={size} value={size}>{size}</option>
-                          ))}
-                        </select>
+                      <div className="mb-3">
+                        <Select 
+                          value={selectedSize[jersey.id] || 'M'} 
+                          onValueChange={(size) => setSelectedSize(prev => ({...prev, [jersey.id]: size}))}
+                        >
+                          <SelectTrigger className="bg-mechitv-bg border-border text-white">
+                            <SelectValue placeholder="Select size" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {jersey.sizes.map((size) => (
+                              <SelectItem key={size} value={size}>{size}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
                       
-                      <Button className="w-full bg-mechitv-accent text-mechitv-bg hover:bg-mechitv-accent/90">
+                      <Button 
+                        className="w-full bg-mechitv-accent text-mechitv-bg hover:bg-mechitv-accent/90"
+                        onClick={() => handleAddToCart(jersey)}
+                      >
                         <ShoppingCart className="mr-2 h-4 w-4" />
                         Add to Cart
                       </Button>
