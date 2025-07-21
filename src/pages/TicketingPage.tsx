@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { 
@@ -18,13 +17,11 @@ import {
   CreditCard,
   Shield
 } from "lucide-react";
-import { useCart } from '@/contexts/CartContext';
-import { useToast } from '@/hooks/use-toast';
+import EventDetailsPage from "@/components/ticketing/EventDetailsPage";
 
 const TicketingPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const { addItem } = useCart();
-  const { toast } = useToast();
+  const [selectedMatch, setSelectedMatch] = useState<any>(null);
 
   const upcomingMatches = [
     {
@@ -78,21 +75,17 @@ const TicketingPage = () => {
   ];
 
   const handleBuyTicket = (match: any) => {
-    addItem({
-      id: `ticket-${match.id}`,
-      type: 'ticket',
-      name: `${match.homeTeam} vs ${match.awayTeam}`,
-      price: match.ticketPrices[0].price,
-      match: `${match.homeTeam} vs ${match.awayTeam}`,
-      date: `${match.date} at ${match.time}`,
-      venue: match.venue
-    });
-    
-    toast({
-      title: "Ticket Added to Cart",
-      description: `${match.homeTeam} vs ${match.awayTeam} ticket added successfully!`,
-    });
+    setSelectedMatch(match);
   };
+
+  if (selectedMatch) {
+    return (
+      <EventDetailsPage 
+        match={selectedMatch} 
+        onBack={() => setSelectedMatch(null)} 
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-mechitv-bg">
