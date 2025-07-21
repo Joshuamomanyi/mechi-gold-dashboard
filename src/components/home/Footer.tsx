@@ -20,7 +20,7 @@ const Footer = () => {
               <li><a href="#" className="hover:text-mechitv-accent">About Us</a></li>
               <li><a href="#" className="hover:text-mechitv-accent">Careers</a></li>
               <li><a href="#" className="hover:text-mechitv-accent">Press</a></li>
-              <li><a href="#" className="hover:text-mechitv-accent">Contact</a></li>
+              <li><Link to="/contact" className="hover:text-mechitv-accent">Contact</Link></li>
             </ul>
           </div>
           <div>
@@ -28,8 +28,8 @@ const Footer = () => {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><a href="#" className="hover:text-mechitv-accent">Help Center</a></li>
               <li><a href="#" className="hover:text-mechitv-accent">Community Guidelines</a></li>
-              <li><a href="#" className="hover:text-mechitv-accent">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-mechitv-accent">Terms of Service</a></li>
+              <li><Link to="/privacy-policy" className="hover:text-mechitv-accent">Privacy Policy</Link></li>
+              <li><Link to="/terms-of-use" className="hover:text-mechitv-accent">Terms of Use</Link></li>
             </ul>
           </div>
           <div>

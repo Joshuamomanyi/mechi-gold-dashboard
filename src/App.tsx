@@ -17,6 +17,9 @@ import TicketingPage from "./pages/TicketingPage";
 import JerseyStorePage from "./pages/JerseyStorePage";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import TermsOfUsePage from "./pages/TermsOfUsePage";
+import ContactPage from "./pages/ContactPage";
 
 // Admin pages
 import AdminIndex from "./pages/Index"; // Renamed to distinguish from the main HomePage
@@ -50,6 +53,9 @@ const App = () => (
           <Route path="/store" element={<UserLayout><JerseyStorePage /></UserLayout>} />
           <Route path="/cart" element={<UserLayout><CartPage /></UserLayout>} />
           <Route path="/checkout" element={<UserLayout><CheckoutPage /></UserLayout>} />
+          <Route path="/privacy-policy" element={<UserLayout><PrivacyPolicyPage /></UserLayout>} />
+          <Route path="/terms-of-use" element={<UserLayout><TermsOfUsePage /></UserLayout>} />
+          <Route path="/contact" element={<UserLayout><ContactPage /></UserLayout>} />
           
           {/* Admin routes */}
           <Route path="/admin" element={<AdminIndex />} />
