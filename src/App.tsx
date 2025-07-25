@@ -31,6 +31,7 @@ import LineupsPage from "./pages/LineupsPage";
 import MatchesPage from "./pages/MatchesPage";
 import HighlightsAdminPage from "./pages/HighlightsPage";
 import SettingsPage from "./pages/SettingsPage";
+import PlayerDashboard from "./pages/PlayerDashboard";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,7 @@ const App = () => (
           <Route path="/privacy-policy" element={<UserLayout><PrivacyPolicyPage /></UserLayout>} />
           <Route path="/terms-of-use" element={<UserLayout><TermsOfUsePage /></UserLayout>} />
           <Route path="/contact" element={<UserLayout><ContactPage /></UserLayout>} />
+          <Route path="/player-dashboard" element={<UserLayout><PlayerDashboard /></UserLayout>} />
           
           {/* Admin routes */}
           <Route path="/admin" element={<AdminIndex />} />
