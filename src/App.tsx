@@ -32,6 +32,8 @@ import MatchesPage from "./pages/MatchesPage";
 import HighlightsAdminPage from "./pages/HighlightsPage";
 import SettingsPage from "./pages/SettingsPage";
 import PlayerDashboard from "./pages/PlayerDashboard";
+import TeamAdminDashboard from "./pages/TeamAdminDashboard";
+import LeagueAdminDashboard from "./pages/LeagueAdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +60,8 @@ const App = () => (
           <Route path="/terms-of-use" element={<UserLayout><TermsOfUsePage /></UserLayout>} />
           <Route path="/contact" element={<UserLayout><ContactPage /></UserLayout>} />
           <Route path="/player-dashboard" element={<UserLayout><PlayerDashboard /></UserLayout>} />
+          <Route path="/team-admin" element={<TeamAdminDashboard />} />
+          <Route path="/league-admin" element={<LeagueAdminDashboard />} />
           
           {/* Admin routes */}
           <Route path="/admin" element={<AdminIndex />} />

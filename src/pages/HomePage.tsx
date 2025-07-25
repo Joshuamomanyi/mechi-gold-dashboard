@@ -10,6 +10,7 @@ import Footer from "@/components/home/Footer";
 import HighlightsSection from "@/components/home/HighlightsSection";
 import NewsSection from "@/components/home/NewsSection";
 import PlayerPerformance from "@/components/home/PlayerPerformance";
+import DashboardAccess from "@/components/home/DashboardAccess";
 
 // Import data
 import { 
@@ -83,6 +84,9 @@ const HomePage = () => {
 
       {/* CTA Section */}
       <CTASection />
+
+      {/* Dashboard Access */}
+      <DashboardAccess />
 
       {/* Footer */}
       <Footer />
